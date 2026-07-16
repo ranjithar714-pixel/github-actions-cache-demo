@@ -1,0 +1,17 @@
+name: Conditional Workflow
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+
+jobs:
+  deploy:
+    if: github.ref == 'refs/heads/main'
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Display Message
+        run: echo "Deploying to Production..."

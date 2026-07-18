@@ -2,10 +2,15 @@ name: Call Reusable Workflow
 
 on:
   workflow_dispatch:
+    inputs:
+      app_name:
+        description: "Enter Application Name"
+        required: true
+        type: string
 
 jobs:
   call-reusable-workflow:
     uses: ./.github/workflows/reusable.yml
 
     with:
-      app_name: Shopping-App
+      app_name: ${{ inputs.app_name }}

@@ -1,20 +1,20 @@
-name: Conditional Workflow
+name: Conditions Demo
 
 on:
-  push:
-    branches:
-      - main
-      - dev
+  workflow_dispatch:
 
 jobs:
-  deploy:
-    if: github.ref == 'refs/heads/main'
-
+  demo:
     runs-on: ubuntu-latest
 
-    environment:
-      name: production
-
     steps:
-      - name: Display Message
-        run: echo "Deploying to Production..."
+      - name: Build
+        run: echo "Build Successful"
+
+      - name: Deploy
+        if: success() && github.ref_name == 'main'
+        run: echo "Deploying to Production"
+
+      - name: Upload Logs
+        if: always()
+        run: echo "Uploading Logs"

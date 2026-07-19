@@ -1,16 +1,24 @@
-name: Step Output Demo
+name: Outputs Demo
 
 on:
   workflow_dispatch:
 
 jobs:
-  demo:
+  build:
+    runs-on: ubuntu-latest
+
+    outputs:
+      build_number: ${{ steps.generate.outputs.build_number }}
+
+    steps:
+      - name: Generate Build Number
+        id: generate
+        run: echo "build_number=1001" >> $GITHUB_OUTPUT
+
+  deploy:
+    needs: build
     runs-on: ubuntu-latest
 
     steps:
-      - name: Generate Version
-        id: version
-        run: echo "version=1.0.5" >> $GITHUB_OUTPUT
-
-      - name: Display Version
-        run: echo "Version is ${{ steps.version.outputs.version }}"
+      - name: Deploy
+        run: echo "Deploying Build ${{ needs.build.outputs.build_number }}"

@@ -19,7 +19,8 @@ jobs:
           echo "Event: ${{ github.event_name }}"
 
       - name: Print Environment Variable
-        run: echo "App Name: ${{ env.APP_NAME }}"
+        run: |
+          echo "App Name: ${{ env.APP_NAME }}"
 
       - name: Print Runner Information
         run: |

@@ -1,0 +1,27 @@
+name: Context Demo
+
+on:
+  workflow_dispatch:
+
+env:
+  APP_NAME: DevOps-Learning
+
+jobs:
+  context-demo:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print GitHub Information
+        run: |
+          echo "Repository: ${{ github.repository }}"
+          echo "Actor: ${{ github.actor }}"
+          echo "Branch: ${{ github.ref_name }}"
+          echo "Event: ${{ github.event_name }}"
+
+      - name: Print Environment Variable
+        run: echo "App Name: ${{ env.APP_NAME }}"
+
+      - name: Print Runner Information
+        run: |
+          echo "Operating System: ${{ runner.os }}"
+          echo "Architecture: ${{ runner.arch }}"
